@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { DatePicker } from 'antd';
+import MainPage from './pages/MainPage';
 
 class App extends Component {
   render() {
     return (
       <div>
-        <DatePicker />
+        <MainPage />
       </div>
     );
   }

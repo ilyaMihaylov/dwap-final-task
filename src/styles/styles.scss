@@ -1,0 +1,121 @@
+@import 'variables';
+
+.main-wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  h4 {
+    font-size: $title-font-size !important;
+  }
+
+  .navigation-panel {
+    display: flex;
+    flex: 0 0 auto;
+
+    .navigation-element {
+      flex: 1;
+      text-align: center;
+    }
+  }
+
+  .panel {
+    display: flex;
+    padding: $base-spacing;
+
+    .list {
+      border: $base-border;
+      border-top-left-radius: $base-border-radius;
+      border-bottom-left-radius: $base-border-radius;
+      overflow: auto;
+
+      .ant-list-item {
+        padding-left: $base-spacing;
+
+        &:hover {
+          border-right: $active-border-width $active-border-style transparentize($primary-color, 0.6);
+        }
+
+        &.active-list-item {
+          border-right: $active-item-border;
+        }
+      }
+    }
+
+    .info {
+      flex: 5;
+      border: $base-border;
+      border-radius: $base-border-radius;
+      margin-left: $base-spacing;
+    }
+
+    .list-item {
+      padding: $base-spacing;
+    }
+
+    .list-item-meta {
+      align-items: center;
+    }
+
+    .editable-list {
+      display: flex;
+      flex: 3;
+      flex-direction: column;
+    }
+
+    .edit-form {
+      border: $base-border;
+      border-radius: $base-border-radius;
+      width: 100%;
+      padding: $base-spacing;
+      flex: 0 0 auto;
+      margin-bottom: $base-spacing;
+
+      .button-panel {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .form {
+        transition: $base-transition;
+        max-height: 0;
+        overflow: hidden;
+
+        &.show {
+          transition: $base-transition;
+          max-height: 500px;
+        }
+
+        .ant-form-item {
+          display: flex;
+          margin: $base-spacing 0 $base-spacing 0;
+          padding: 0;
+
+          .ant-form-item-label {
+            flex: 2;
+            padding: 0;
+            line-height: 30px;
+          }
+
+          .ant-form-item-control-wrapper {
+            flex: 5;
+
+            .ant-input-number {
+              width: 100%;
+            }
+          }
+
+          &.form-actions {
+            margin-bottom: 0;
+
+            .ant-form-item-children {
+              display: flex;
+              justify-content: space-between;
+            }
+          }
+        }
+      }
+    }
+  }
+}

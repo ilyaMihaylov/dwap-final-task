@@ -1,0 +1,27 @@
+//Font Sizes
+$base-font-size: 14px;
+$title-font-size: $base-font-size * 1.5;
+
+//Colors
+$primary-color: #1890ff;
+$gray: #e8e8e8;
+
+//Border
+$base-border-width: 1px;
+$base-border-style: solid;
+$base-border-color: $gray;
+$base-border-radius: 30px;
+
+$base-border: $base-border-width $base-border-style $base-border-color;
+
+$active-border-width: $base-border-width * 3;
+$active-border-style: $base-border-style;
+$active-border-color: $primary-color;
+
+$active-item-border: $active-border-width $active-border-style $active-border-color;
+
+//Spacing
+$base-spacing: 1em;
+
+//Animations
+$base-transition: all 0.5s ease-in-out;
