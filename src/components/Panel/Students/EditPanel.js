@@ -10,6 +10,7 @@ class EditPanel extends Component {
     this.state = {
       isHidden: true,
       isEdit: false,
+      isClosing: false,
     };
   }
 
@@ -50,8 +51,8 @@ class EditPanel extends Component {
   };
 
   closeForm = () => {
+    this.setState({ isHidden: true, isClosing: true });
     this.resetForm();
-    this.setState({ isHidden: true });
   };
 
   addStudent = e => {
@@ -74,7 +75,7 @@ class EditPanel extends Component {
   };
 
   render() {
-    const { isHidden, isEdit } = this.state;
+    const { isHidden, isEdit, isClosing } = this.state;
     const {
       form: { getFieldDecorator },
       currentStudent,
@@ -91,6 +92,7 @@ class EditPanel extends Component {
             icon='plus-circle'
             size='large'
             onClick={() => {
+              this.resetForm();
               this.resetEditing();
               this.openForm();
             }}
@@ -102,8 +104,10 @@ class EditPanel extends Component {
             size='large'
             disabled={!currentStudent}
             onClick={() => {
-              this.resetEditing();
-              this.closeForm();
+              if (isEdit) {
+                this.resetEditing();
+                this.closeForm();
+              }
               removeStudentById(currentStudent.id);
             }}
           />
@@ -114,6 +118,7 @@ class EditPanel extends Component {
             size='large'
             disabled={!currentStudent}
             onClick={() => {
+              this.resetForm();
               this.setState({ isEdit: true });
               this.openForm();
             }}

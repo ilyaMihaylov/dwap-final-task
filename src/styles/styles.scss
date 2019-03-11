@@ -1,4 +1,4 @@
-@import 'variables';
+@import "variables";
 
 .main-wrapper {
   height: 100vh;
@@ -75,6 +75,15 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+
+        .ant-btn-circle {
+          display: grid;
+
+          .anticon {
+            line-height: 0;
+            margin: auto;
+          }
+        }
       }
 
       .form {
