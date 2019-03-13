@@ -10,7 +10,6 @@ class EditPanel extends Component {
     this.state = {
       isHidden: true,
       isEdit: false,
-      isClosing: false,
     };
   }
 
@@ -75,7 +74,7 @@ class EditPanel extends Component {
   };
 
   render() {
-    const { isHidden, isEdit, isClosing } = this.state;
+    const { isHidden, isEdit } = this.state;
     const {
       form: { getFieldDecorator },
       currentStudent,

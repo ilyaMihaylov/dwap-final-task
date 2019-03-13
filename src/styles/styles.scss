@@ -23,6 +23,15 @@
     display: flex;
     padding: $base-spacing;
 
+    .ant-btn-circle {
+      display: grid;
+
+      .anticon {
+        line-height: 0;
+        margin: auto;
+      }
+    }
+
     .list {
       border: $base-border;
       border-top-left-radius: $base-border-radius;
@@ -42,15 +51,85 @@
       }
     }
 
+    .form {
+      transition: $base-transition;
+      max-height: 0;
+      overflow: hidden;
+      width: 100%;
+
+      &.show {
+        transition: $base-transition;
+        max-height: 500px;
+      }
+
+      .ant-form-item {
+        display: flex;
+        margin: $base-spacing 0 $base-spacing 0;
+        padding: 0;
+
+        .ant-form-item-label {
+          flex: 2;
+          padding: 0;
+          line-height: 30px;
+        }
+
+        .ant-form-item-control-wrapper {
+          flex: 5;
+
+          .ant-input-number {
+            width: 100%;
+          }
+        }
+
+        &.form-actions {
+          margin-bottom: 0;
+
+          .ant-form-item-children {
+            display: flex;
+            justify-content: space-between;
+          }
+        }
+      }
+    }
+
     .info {
       flex: 5;
       border: $base-border;
       border-radius: $base-border-radius;
       margin-left: $base-spacing;
+
+      .ant-list-header {
+        .list-item {
+          display: flex;
+          width: 100%;
+          flex-direction: column;
+
+          > div {
+            width: 100%;
+          }
+        }
+      }
+
+      .ant-list-footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
 
     .list-item {
       padding: $base-spacing;
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+
+      .ant-list-item-content {
+        flex: 0 0 auto;
+
+        button {
+          margin-right: 1em;
+        }
+      }
     }
 
     .list-item-meta {
@@ -75,56 +154,9 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-
-        .ant-btn-circle {
-          display: grid;
-
-          .anticon {
-            line-height: 0;
-            margin: auto;
-          }
-        }
       }
 
-      .form {
-        transition: $base-transition;
-        max-height: 0;
-        overflow: hidden;
-
-        &.show {
-          transition: $base-transition;
-          max-height: 500px;
-        }
-
-        .ant-form-item {
-          display: flex;
-          margin: $base-spacing 0 $base-spacing 0;
-          padding: 0;
-
-          .ant-form-item-label {
-            flex: 2;
-            padding: 0;
-            line-height: 30px;
-          }
-
-          .ant-form-item-control-wrapper {
-            flex: 5;
-
-            .ant-input-number {
-              width: 100%;
-            }
-          }
-
-          &.form-actions {
-            margin-bottom: 0;
-
-            .ant-form-item-children {
-              display: flex;
-              justify-content: space-between;
-            }
-          }
-        }
-      }
+      
     }
   }
 }

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { List, Avatar } from 'antd';
+import { List, Avatar, Button } from 'antd';
+import EventForm from './EventForm';
 
 export default class StudentInfo extends Component {
   render() {
-    const { currentStudent, currentStudentEvents } = this.props;
+    const { currentStudent, currentStudentEvents, deleteEvent } = this.props;
 
     return (
       <div className='info'>
@@ -18,10 +19,22 @@ export default class StudentInfo extends Component {
                 title={currentStudent.name}
                 description={`${currentStudent.spec}-${currentStudent.year}-${currentStudent.group}`}
               />
+              <EventForm />
             </List.Item>
           }
+          footer={<Button type='primary' shape='circle' icon='plus-circle' size='large' onClick={() => {}} />}
           renderItem={item => (
             <List.Item className='list-item'>
+              <Button
+                type='primary'
+                shape='circle'
+                icon='delete'
+                size='large'
+                onClick={() => {
+                  deleteEvent(item.id);
+                }}
+              />
+              <Button type='primary' shape='circle' icon='edit' size='large' onClick={() => {}} />
               <List.Item.Meta
                 className='list-item-meta'
                 title={item.text}

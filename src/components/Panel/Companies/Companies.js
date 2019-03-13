@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CompaniesList from './CompaniesList';
 import CompanyInfo from './CompanyInfo';
 import EditPanel from './EditPanel';
+import { COMPANIES } from '../../../Data';
 
 export default class Companies extends Component {
   constructor(props) {
@@ -9,14 +10,7 @@ export default class Companies extends Component {
 
     this.state = {
       currentCompany: null,
-      companies: [
-        { id: 1, name: 'iTechArt' },
-        { id: 2, name: 'LeverX' },
-        { id: 3, name: 'iSsoft' },
-        { id: 4, name: 'EPAM' },
-        { id: 5, name: 'IBA' },
-        { id: 6, name: 'Wargaming' },
-      ],
+      companies: COMPANIES,
     };
 
     this.addCompany = this.addCompany.bind(this);
@@ -30,16 +24,12 @@ export default class Companies extends Component {
   };
 
   removeCompanyById = companyId => {
-    const { companies } = this.state;
-
-    this.setState({ companies: [...companies].filter(company => company.id !== companyId), currentCompany: null });
+    this.setState({ companies: COMPANIES.filter(company => company.id !== companyId), currentCompany: null });
   };
 
   addCompany = company => {
-    const { companies } = this.state;
-
     this.setState({
-      companies: [...companies].concat({ ...company, id: [...companies].sort((a, b) => b.id - a.id)[0].id + 1 }),
+      companies: COMPANIES.concat({ ...company, id: [...COMPANIES].sort((a, b) => b.id - a.id)[0].id + 1 }),
     });
   };
 
@@ -60,7 +50,7 @@ export default class Companies extends Component {
 
   render() {
     const { currentCompany, companies } = this.state;
-    const { events } = this.props;
+    const { events, deleteEvent } = this.props;
 
     const currentCompanyEvents =
       currentCompany && events.filter(event => (event.company ? event.company.id === currentCompany.id : ''));
@@ -80,7 +70,13 @@ export default class Companies extends Component {
             ''
           )}
         </div>
-        {currentCompany && <CompanyInfo currentCompany={currentCompany} currentCompanyEvents={currentCompanyEvents} />}
+        {currentCompany && (
+          <CompanyInfo
+            currentCompany={currentCompany}
+            currentCompanyEvents={currentCompanyEvents}
+            deleteEvent={deleteEvent}
+          />
+        )}
       </div>
     );
   }

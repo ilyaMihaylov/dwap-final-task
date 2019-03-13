@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { List, Avatar } from 'antd';
+import { List, Avatar, Button } from 'antd';
 
 export default class CompanyInfo extends Component {
   render() {
-    const { currentCompany, currentCompanyEvents } = this.props;
+    const { currentCompany, currentCompanyEvents, deleteEvent } = this.props;
 
     return (
       <div className='info'>
@@ -21,6 +21,16 @@ export default class CompanyInfo extends Component {
           }
           renderItem={item => (
             <List.Item className='list-item'>
+              <Button
+                type='primary'
+                shape='circle'
+                icon='delete'
+                size='large'
+                onClick={() => {
+                  deleteEvent(item.id);
+                }}
+              />
+              <Button type='primary' shape='circle' icon='edit' size='large' onClick={() => {}} />
               <List.Item.Meta
                 className='list-item-meta'
                 title={item.student.name}
