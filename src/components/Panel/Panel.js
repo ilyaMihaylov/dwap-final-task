@@ -12,26 +12,53 @@ export default class Panel extends Component {
     this.state = {
       events: EVENTS,
     };
+
+    this.deleteEventStudent = this.deleteEventStudent.bind(this);
   }
 
-  deleteEvent = eventId => {
+  deleteEventStudent = (eventId, studentId) => {
     const { events } = this.state;
 
-    this.setState({ events: [...events].filter(event => event.id !== eventId) });
+    this.setState({
+      events: [...events].map(event => {
+        if (event.id === eventId && event.student.id === studentId) {
+          return { ...event, student: { ...event.student, id: 0 } };
+        }
+
+        return event;
+      }),
+    });
+  };
+
+  deleteEventCompany = (eventId, companyId) => {
+    const { events } = this.state;
+
+    this.setState({
+      events: [...events].map(event => {
+        if (event.id === eventId && event.company.id === companyId) {
+          return { ...event, student: { ...event.student, id: 0 } };
+        }
+
+        return event;
+      }),
+    });
   };
 
   render() {
     const { currentPanel } = this.props;
     const { events } = this.state;
-    const panels = {
-      students: Students,
-      companies: Companies,
-      events: Events,
-      contacts: Contacts,
-    };
 
-    const CurrentPanel = panels[currentPanel];
-
-    return <CurrentPanel events={events} deleteEvent={this.deleteEvent} />;
+    switch (currentPanel) {
+      case 'students':
+        return <Students events={events} deleteEventStudent={this.deleteEventStudent} />;
+      case 'companies':
+        return <Companies events={events} deleteEventCompany={this.deleteEventCompany} />;
+      case 'events':
+        return <Events events={events} deleteEvent={this.deleteEvent} />;
+      case 'contacts':
+        return <Contacts events={events} deleteEvent={this.deleteEvent} />;
+      default:
+        return '';
+    }
   }
 }

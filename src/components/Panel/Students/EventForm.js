@@ -1,16 +1,32 @@
 import React, { Component } from 'react';
-import { Button, Form, Select, Input, InputNumber, DatePicker } from 'antd';
+import { Button, Form, Select, Input, DatePicker } from 'antd';
+import { COMPANIES } from '../../../Data';
 
 const { Option } = Select;
 
 class EventForm extends Component {
-  render() {
+  resetForm = () => {
     const {
-      form: { getFieldDecorator },
+      form: { resetFields },
     } = this.props;
 
+    resetFields();
+  };
+
+  render() {
+    const {
+      isHidden,
+      hideForm,
+      form: { getFieldDecorator },
+    } = this.props;
+    const companiesOptions = COMPANIES.map(company => (
+      <Option key={company.id} value={company.name}>
+        {company.name}
+      </Option>
+    ));
+
     return (
-      <div className='form'>
+      <div className={isHidden ? 'form' : 'form show'}>
         <Form
           layout='vertical'
           onSubmit={e => {
@@ -27,32 +43,15 @@ class EventForm extends Component {
               ],
             })(<DatePicker placeholder='Choose Date' />)}
           </Form.Item>
-          <Form.Item label='Speciality'>
-            {getFieldDecorator('spec', {
+          <Form.Item label='Company'>
+            {getFieldDecorator('company', {
               rules: [
                 {
                   required: true,
-                  message: 'Please select student speciality!',
+                  message: 'Please select company!',
                 },
               ],
-            })(
-              <Select placeholder='Select Speciality'>
-                <Option value='ИСиТ'>ИСиТ</Option>
-                <Option value='ПОИТ'>ПОИТ</Option>
-                <Option value='ДЭВИ'>ДЭВИ</Option>
-                <Option value='ПОИБМС'>ПОИБМС</Option>
-              </Select>
-            )}
-          </Form.Item>
-          <Form.Item label='Admission Year'>
-            {getFieldDecorator('year', {
-              rules: [
-                {
-                  required: true,
-                  message: 'Please enter student year of admission!',
-                },
-              ],
-            })(<InputNumber placeholder='Enter Year' />)}
+            })(<Select placeholder='Select Company'>{companiesOptions}</Select>)}
           </Form.Item>
           <Form.Item label='Description'>
             {getFieldDecorator('text', {
@@ -62,13 +61,26 @@ class EventForm extends Component {
                   message: 'Please enter description!',
                 },
               ],
-            })(<Input placeholder='Enter Group' />)}
+            })(<Input placeholder='Enter Description' />)}
           </Form.Item>
           <Form.Item className='form-actions'>
-            <Button type='danger' htmlType='button' onClick={this.closeForm}>
+            <Button
+              type='danger'
+              htmlType='button'
+              onClick={() => {
+                hideForm();
+                this.resetForm();
+              }}
+            >
               Cancel
             </Button>
-            <Button type='primary' htmlType='submit'>
+            <Button
+              type='primary'
+              htmlType='submit'
+              onClick={() => {
+                hideForm();
+              }}
+            >
               {'Add'}
             </Button>
           </Form.Item>

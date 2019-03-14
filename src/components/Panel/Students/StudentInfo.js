@@ -3,8 +3,29 @@ import { List, Avatar, Button } from 'antd';
 import EventForm from './EventForm';
 
 export default class StudentInfo extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isHidden: true,
+    };
+
+    this.hideForm = this.hideForm.bind(this);
+  }
+
+  hideForm() {
+    this.setState({ isHidden: true });
+  }
+
+  showForm() {
+    this.setState({ isHidden: false });
+  }
+
   render() {
-    const { currentStudent, currentStudentEvents, deleteEvent } = this.props;
+    const { isHidden } = this.state;
+    const { currentStudent, currentStudentEvents, deleteEventStudent } = this.props;
+
+    console.log(this.props);
 
     return (
       <div className='info'>
@@ -19,22 +40,32 @@ export default class StudentInfo extends Component {
                 title={currentStudent.name}
                 description={`${currentStudent.spec}-${currentStudent.year}-${currentStudent.group}`}
               />
-              <EventForm />
-            </List.Item>
-          }
-          footer={<Button type='primary' shape='circle' icon='plus-circle' size='large' onClick={() => {}} />}
-          renderItem={item => (
-            <List.Item className='list-item'>
+              <EventForm isHidden={isHidden} hideForm={this.hideForm} showForm={this.showForm} />
               <Button
                 type='primary'
                 shape='circle'
-                icon='delete'
+                icon='plus-circle'
                 size='large'
                 onClick={() => {
-                  deleteEvent(item.id);
+                  this.showForm();
                 }}
               />
-              <Button type='primary' shape='circle' icon='edit' size='large' onClick={() => {}} />
+            </List.Item>
+          }
+          renderItem={item => (
+            <List.Item className='list-item'>
+              <div className='event-buttons'>
+                <Button
+                  type='primary'
+                  shape='circle'
+                  icon='delete'
+                  size='large'
+                  onClick={() => {
+                    deleteEventStudent(item.id, currentStudent.id);
+                  }}
+                />
+                <Button type='primary' shape='circle' icon='edit' size='large' onClick={() => {}} />
+              </div>
               <List.Item.Meta
                 className='list-item-meta'
                 title={item.text}

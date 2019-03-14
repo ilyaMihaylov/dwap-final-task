@@ -124,10 +124,16 @@
       align-items: center;
 
       .ant-list-item-content {
-        flex: 0 0 auto;
+        flex: 0;
+        flex-direction: column;
+        align-items: center;
 
-        button {
-          margin-right: 1em;
+        .event-buttons {
+          display: flex;
+
+          button {
+            margin-right: 1em;
+          }
         }
       }
     }
@@ -155,8 +161,6 @@
         align-items: center;
         justify-content: space-between;
       }
-
-      
     }
   }
 }
