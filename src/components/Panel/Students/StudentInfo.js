@@ -8,24 +8,25 @@ export default class StudentInfo extends Component {
 
     this.state = {
       isHidden: true,
+      selectedEvent: null,
     };
-
-    this.hideForm = this.hideForm.bind(this);
   }
 
-  hideForm() {
+  hideForm = () => {
     this.setState({ isHidden: true });
-  }
+  };
 
-  showForm() {
+  showForm = () => {
     this.setState({ isHidden: false });
-  }
+  };
+
+  resetSelection = () => {
+    this.setState({ selectedEvent: null });
+  };
 
   render() {
-    const { isHidden } = this.state;
-    const { currentStudent, currentStudentEvents, deleteEventStudent } = this.props;
-
-    console.log(this.props);
+    const { isHidden, selectedEvent } = this.state;
+    const { currentStudent, currentStudentEvents, deleteEventStudent, addEvent, editEvent } = this.props;
 
     return (
       <div className='info'>
@@ -40,7 +41,16 @@ export default class StudentInfo extends Component {
                 title={currentStudent.name}
                 description={`${currentStudent.spec}-${currentStudent.year}-${currentStudent.group}`}
               />
-              <EventForm isHidden={isHidden} hideForm={this.hideForm} showForm={this.showForm} />
+              <EventForm
+                isHidden={isHidden}
+                hideForm={this.hideForm}
+                showForm={this.showForm}
+                addEvent={addEvent}
+                currentStudent={currentStudent}
+                selectedEvent={selectedEvent}
+                resetSelection={this.resetSelection}
+                editEvent={editEvent}
+              />
               <Button
                 type='primary'
                 shape='circle'
@@ -48,6 +58,7 @@ export default class StudentInfo extends Component {
                 size='large'
                 onClick={() => {
                   this.showForm();
+                  this.resetSelection();
                 }}
               />
             </List.Item>
@@ -64,7 +75,16 @@ export default class StudentInfo extends Component {
                     deleteEventStudent(item.id, currentStudent.id);
                   }}
                 />
-                <Button type='primary' shape='circle' icon='edit' size='large' onClick={() => {}} />
+                <Button
+                  type='primary'
+                  shape='circle'
+                  icon='edit'
+                  size='large'
+                  onClick={() => {
+                    this.showForm();
+                    this.setState({ selectedEvent: item });
+                  }}
+                />
               </div>
               <List.Item.Meta
                 className='list-item-meta'

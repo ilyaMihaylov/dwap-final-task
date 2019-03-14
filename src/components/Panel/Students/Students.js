@@ -54,7 +54,7 @@ export default class Students extends Component {
 
   render() {
     const { currentStudent, students } = this.state;
-    const { events, deleteEventStudent } = this.props;
+    const { events, deleteEventStudent, addEvent, editEvent } = this.props;
 
     const currentStudentEvents = currentStudent && events.filter(event => event.student.id === currentStudent.id);
 
@@ -78,6 +78,8 @@ export default class Students extends Component {
             currentStudent={currentStudent}
             currentStudentEvents={currentStudentEvents}
             deleteEventStudent={deleteEventStudent}
+            addEvent={addEvent}
+            editEvent={editEvent}
           />
         )}
       </div>

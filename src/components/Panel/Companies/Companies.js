@@ -50,7 +50,7 @@ export default class Companies extends Component {
 
   render() {
     const { currentCompany, companies } = this.state;
-    const { events, deleteEvent } = this.props;
+    const { events, deleteEventCompany, addEvent, editEvent } = this.props;
 
     const currentCompanyEvents =
       currentCompany && events.filter(event => (event.company ? event.company.id === currentCompany.id : ''));
@@ -74,7 +74,9 @@ export default class Companies extends Component {
           <CompanyInfo
             currentCompany={currentCompany}
             currentCompanyEvents={currentCompanyEvents}
-            deleteEvent={deleteEvent}
+            deleteEventCompany={deleteEventCompany}
+            addEvent={addEvent}
+            editEvent={editEvent}
           />
         )}
       </div>

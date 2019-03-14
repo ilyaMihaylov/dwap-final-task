@@ -14,7 +14,7 @@ export const STUDENTS = [
   { id: 13, name: 'Алексей А.А.', spec: 'ПОИБМС', group: 7, year: 2015 },
   { id: 14, name: 'Григорьев  Г.Г.', spec: 'ДЭВИ', group: 9, year: 2016 },
   { id: 15, name: 'Владимиров В.В.', spec: 'ПОИБМС', group: 8, year: 2017 },
-  { id: 16, name: 'Петров П.П.', spec: 'ДЭВИ', group: 9, year: 2017 },
+  { id: 16, name: 'Петров П.И.', spec: 'ДЭВИ', group: 9, year: 2017 },
   { id: 17, name: 'Юрьев Ю.Ю.', spec: 'ИСиТ', group: 3, year: 2017 },
   { id: 18, name: 'Евгеньев Е.В.', spec: 'ПОИБМС', group: 6, year: 2018 },
   { id: 19, name: 'Валерьев В.В.', spec: 'ПОИБМС', group: 7, year: 2017 },

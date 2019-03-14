@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Form, Select, Input, DatePicker } from 'antd';
-import { COMPANIES } from '../../../Data';
+import { STUDENTS } from '../../../Data';
 import moment from 'moment';
 
 const { Option } = Select;
@@ -17,7 +17,7 @@ class EventForm extends Component {
   addEvent = e => {
     const {
       addEvent,
-      currentStudent,
+      currentCompany,
       hideForm,
       form: { validateFields },
     } = this.props;
@@ -26,13 +26,13 @@ class EventForm extends Component {
 
     validateFields((err, values) => {
       if (!err) {
-        const { date, company, text } = values;
+        const { date, student, text } = values;
 
         addEvent({
           date: date.format('YYYY-MM-DD'),
           text,
-          company: { id: COMPANIES.find(baseCompany => baseCompany.name === company).id, name: company },
-          student: { ...currentStudent },
+          company: { ...currentCompany },
+          student: { id: STUDENTS.find(baseStudent => baseStudent.name === student).id, name: student },
         });
 
         this.resetForm();
@@ -45,7 +45,7 @@ class EventForm extends Component {
     const {
       selectedEvent,
       editEvent,
-      currentStudent,
+      currentCompany,
       hideForm,
       form: { validateFields },
     } = this.props;
@@ -54,14 +54,14 @@ class EventForm extends Component {
 
     validateFields((err, values) => {
       if (!err) {
-        const { date, company, text } = values;
+        const { date, student, text } = values;
 
         editEvent({
           id: selectedEvent.id,
           date: date.format('YYYY-MM-DD'),
           text,
-          company: { id: COMPANIES.find(baseCompany => baseCompany.name === company).id, name: company },
-          student: { ...currentStudent },
+          company: { ...currentCompany },
+          student: { id: STUDENTS.find(baseStudent => baseStudent.name === student).id, name: student },
         });
 
         this.resetForm();
@@ -74,13 +74,13 @@ class EventForm extends Component {
     const {
       isHidden,
       hideForm,
+      selectedEvent,
       resetSelection,
       form: { getFieldDecorator },
-      selectedEvent,
     } = this.props;
-    const companiesOptions = COMPANIES.map(company => (
-      <Option key={company.id} value={company.name}>
-        {company.name}
+    const studentsOptions = STUDENTS.map(student => (
+      <Option key={student.id} value={student.name}>
+        {student.name}
       </Option>
     ));
 
@@ -107,16 +107,16 @@ class EventForm extends Component {
               initialValue: selectedEvent ? moment(selectedEvent.date, 'YYYY-MM-DD') : null,
             })(<DatePicker placeholder='Choose Date' />)}
           </Form.Item>
-          <Form.Item label='Company'>
-            {getFieldDecorator('company', {
+          <Form.Item label='Student'>
+            {getFieldDecorator('student', {
               rules: [
                 {
                   required: true,
-                  message: 'Please select company!',
+                  message: 'Please select student!',
                 },
               ],
-              initialValue: selectedEvent ? selectedEvent.company.name : [],
-            })(<Select placeholder='Select Company'>{companiesOptions}</Select>)}
+              initialValue: selectedEvent ? selectedEvent.student.name : [],
+            })(<Select placeholder='Select Student'>{studentsOptions}</Select>)}
           </Form.Item>
           <Form.Item label='Description'>
             {getFieldDecorator('text', {
